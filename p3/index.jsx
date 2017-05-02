@@ -22,17 +22,63 @@ class App extends React.Component {
 
 //---------------------------------------------------------------------
 
+
+
+
     tulosta_tieto(){
 
         var puskuri_muuttuja = [];
         
-        for(var i = 0; i < this.state.taulukko.length; i++){
-           puskuri_muuttuja.push(<p>{this.state.taulukko[i]}</p>);
-        }
+        var taulun_tyyli = { borderStyle : 'solid' , borderWidth: 5, borderColor: 'green' };
+        var solun_tyyli = { borderStyle : 'solid' , borderWidth: 3, borderColor: 'green' };
+        var jokatoinen = {borderStyle : 'solid' , borderWidth: 3, borderColor: 'red' };
 
-      
-       return <div> {puskuri_muuttuja} </div>;
-    }
+        
+          // puskuri_muuttuja.push( <p> <table> </p>  ); 
+     //   for(var i = 0; i < this.state.taulukko.length; i++){
+          this.state.taulukko.forEach( ( taulukko_arvo , index ) => {
+
+
+
+          
+       
+       
+       
+           //puskuri_muuttuja.push( <p> <tr /> <td> {this.state.taulukko[i]} </td> <td> <button> Poista </button> </td>  </p> );
+          // puskuri_muuttuja.push("<tr /> <td>" + <p> {this.state.taulukko[i]} + </p> +"</td> <td> <button> Poista </button> </td>");
+            // puskuri_muuttuja.push( <p> <tr /> <td> </p>  <p> {this.state.taulukko[i]} </p> <p> </td> <td> <button> Poista </button> </td> </p>);
+
+              // puskuri_muuttuja.push( <tr > <td style={solun_tyyli} > <p> {this.state.taulukko[i]} </p> </td> <td style={solun_tyyli}> <button> Poista </button> </td></tr>);
+                
+         
+
+
+              var solunvari = (index % 2) == 1 ? jokatoinen : solun_tyyli;
+
+               /*
+               if(punainen){
+                  // puskuri_muuttuja.push( <tr > <td style={jokatoinen} > <p> {this.state.taulukko[i]} </p> </td> <td style={jokatoinen}> <button> Poista </button> </td></tr>);
+                   solunvari = jokatoinen;
+               }
+               else if( !punainen) {
+                   // puskuri_muuttuja.push( <tr > <td style={solun_tyyli} > <p> {this.state.taulukko[i]} </p> </td> <td style={solun_tyyli}> <button> Poista </button> </td></tr>);
+                    solunvari = solun_tyyli;
+               }
+               */
+              
+              //vanha for //puskuri_muuttuja.push( <tr > <td style={solunvari} > <p> {this.state.taulukko[i]} </p> </td> <td style={solunvari}> <button onClick = { () => this.tiedon_poisto(index) } > Poista </button> </td></tr>);
+                  puskuri_muuttuja.push( <tr > <td style={solunvari} > <p> {taulukko_arvo} </p> </td> <td style={solunvari}> <button onClick = { () => this.tiedon_poisto(index) } > Poista </button> </td></tr>);
+
+                } );
+
+        //} //for loppu
+          //<th> Viesti : </th> <th> Toiminnot  <th>
+       return <div> <table style = {taulun_tyyli } > {puskuri_muuttuja}  </table> </div>;
+    
+      // borderColor: '#000033', borderWidth: 1,
+      //borderStyle: this.state.showBorder ? 'dashed' : null, //else if rakenne, ternary operator
+
+}
 
 //---------------------------------------------------------------------
 tieto_lisays(){
@@ -46,7 +92,19 @@ tieto_lisays(){
 
     console.log('tieto lisätty');
 
-    this.setState(this.state);
+    this.setState(this.state); //tallentaa muistiin ja päivittää React komponentin näyttön
+
+}
+
+//---------------------------------------------------------------------
+
+tiedon_poisto( elementti_indeksi ){
+
+this.state.taulukko.splice(elementti_indeksi, 1);  //poista elementti (indeksi)
+
+ this.setState(this.state); //tallentaa muistiin ja päivittää React komponentin näyttön
+
+ console.log('Poista elementti ' + elementti_indeksi);
 
 }
 
@@ -101,3 +159,23 @@ console.log('Nayta lisäys nappi');
 
  render(<App/>, document.getElementById('app')); 
 console.log('Hello World!');
+
+
+
+
+/*
+Ternary operaatori käyttö
+
+    if(nimi == "admin") temp_nimi = nimi;
+     else temp_nimi = "user";
+
+
+     temp_nimi = nimi == "admin" ? nimi : "user";
+
+
+     return a ? 1 : (b ? 2 : (c ? 3 : 4))
+     if (a) return 1
+     else if (b) return 2
+     else if (c) return 3
+     else return 4
+*/
