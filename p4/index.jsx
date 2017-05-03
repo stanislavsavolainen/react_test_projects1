@@ -18,7 +18,8 @@ class App extends React.Component {
 
         this.state = {
            tiedoston_teksti: "Ei ole tietoa !",
-           init_tapahtunut: false
+           init_tapahtunut: false,
+           yleinen_tieto : ""
     
         }
     }
@@ -67,6 +68,52 @@ class App extends React.Component {
 
     }
 
+//-------------------------------------------------------------
+
+nayta_tiedot(){
+
+    
+    //parseroi tiedotn muuttujan
+   // var str = "How are you doing today?";
+   //var res = str.split(" "); 
+   var tieto_taulukko = this.state.tiedoston_teksti.split("*"); //uusi viesti alkaa merkillä   *
+   var tietojen_lukumaara = 0;
+
+    const tieto_elementit = [];
+    
+     var taulun_tyyli = { borderStyle : 'solid' , borderWidth: 5, borderColor: 'green' };
+    var solun_tyyli = { borderStyle : 'solid' , borderWidth: 3, borderColor: 'green' };
+
+
+   //tietojen_lukumaara = tieto_taulukko.lenght; // kertoo kuinka paljon viestejä on tiedostossa      
+   
+    //käy läpi for-each silmukalla kaikki tiedot
+   // for(var i = 0; i < tieto_taulukko.length; i++){
+      
+      
+      tieto_taulukko.forEach(  (elementin_arvo , taulukko_indx) => {
+        
+        tietojen_lukumaara ++;
+
+        //tieto_elementit.push( <div> <br /> {elementin_arvo}  </div>);
+        tieto_elementit.push( <tr> <td style={solun_tyyli}> {elementin_arvo} </td> </tr>);
+
+    } );
+    
+
+
+return (<div> <p> Elementien lukumäärä : { tietojen_lukumaara } <br /> <table style={taulun_tyyli} > { tieto_elementit } </table> </p> </div>);
+}
+
+//-------------------------------------------------------------
+
+kirjoita_uusi_tieto(){
+
+
+
+
+return ( <div> </div>);
+}
 
 //-------------------------------------------------------------
 
@@ -91,7 +138,10 @@ omareactinitfunktio(){
         return ( <div>
          <input type='file' accept='text/plain' onChange = { (tapahtuma) => this.lueTiedosto( tapahtuma)  } />
          <p> Hello React!  {this.state.tiedoston_teksti} </p> 
-         
+         <br />
+         { this.kirjoita_uusi_tieto() }
+         <br /> 
+         { this.nayta_tiedot() }
          </div>);
     }
 
