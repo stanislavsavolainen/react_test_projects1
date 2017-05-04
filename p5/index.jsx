@@ -7,6 +7,8 @@ import { render } from 'react-dom';
 
 class App extends React.Component {
 
+	//ok, muutos tapahtunut.
+
     //-----------------------------------------------------
 
     evasteiden_muutos(){
