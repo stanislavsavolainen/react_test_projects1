@@ -31,9 +31,10 @@ class App extends React.Component {
     }
 
     sendPost() {
-        
-        fetch('http://localhost:8080/process_post', { method: 'POST', body: JSON.stringify({a: 1, b: 2}) }).then((resp) => {
-            console.log("RESP", resp);
+        fetch('http://localhost:8080/process_post', { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({a: 1, b: 2}) }).then((resp) => {
+            
+            console.log("Suorita POST lähetys ")
+            console.log("RESP", resp.body);
         })
     }
 
@@ -41,15 +42,20 @@ class App extends React.Component {
 
         console.log("Get kutsuttu.");
         //asynkrooninen get pyyntö
-        fetch('http://localhost:8080/moi2').then((resp) => {
+        fetch('http://localhost:8080/moi').then((resp) => {
+             //console.log( "Fetch on aloitettu !" ); // tämä viesti ei näy ---> ei näy catch lohkossa, näkyy vain ennen return komentoa, mutta aiheuttaa virhettä tässä kohdassa (häiritse JSON palautusta)
             return resp.json();
         }).then((r) => {
+            console.log("Fetch on suoritettu !"); //tulostetaan aina kun sivu on löytynyt
             console.log("R", r.body, r.test);
             this.setState({ test: r.body });
         }).catch((err) => {
+            console.log("Sivua ei löytynyt suorita virhe poikkeus tänne !");
             this.setState({ error: true, errorMsg: "poop" });
             console.log("ERR", err);
         })
+
+        console.log("Get JSON-tiedot : "+resp); //tulosta JSON-tiedon sisällön konsolissa
 
     }
 
