@@ -16,8 +16,8 @@ class App extends React.Component {
         super(props);
         this.state = {
             //
-            kentta_data: ["Nimi", "Sukunimi", "Ikä", "Ammatti", "Puhnro", "Sähköposti", "aaaaa", "bbbb", "ccccc"],
-            kentta_nimet: ["i_nimi", "i_snimi", "i_ika", "i_prof", "i_phone", "i_email", "aaaaa", "bbbb", "ccccc"],
+            kentta_data: ["Nimi", "Sukunimi", "Ikä", "Ammatti", "Puhnro", "Sähköposti", "aaaaa", "bbbb", "ccccc", "dddsdas", "abcd"],
+            kentta_nimet: ["i_nimi", "i_snimi", "i_ika", "i_prof", "i_phone", "i_email", "aaaaa", "bbbb", "ccccc", "fisdofjsoi", "asdfg"],
             //tyyli taulukko
             table: { borderStyle: 'solid', borderWidth: 5, borderColor: 'green', backgroundColor: 'orange', color: 'green' },
             td: { borderStyle: 'solid', borderWidth: 3, borderColor: 'blue' },
@@ -95,24 +95,32 @@ class App extends React.Component {
 
 
         //=================================
-
+        
 
         //JSON tieto
         //JSON.stringify(this.state.taulukko);
 
 
         // var get_json_muuttuja = { method: 'GET', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(this.state.taulukko) };
-        var get_json_muuttuja = { method: 'GET', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(json_data) };
+       // var get_json_muuttuja = { method: 'GET', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(json_data) };
       //  var get_json_muuttuja = { method: 'GET', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify({ json_data }) };
+      var get_json_muuttuja = { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: JSON.stringify(this.state.taulukko) };
 
 
         fetch('http://localhost:8080/lomake1', get_json_muuttuja).then((resp) => {
             //fetch('http://localhost:8080/lomake1').then((resp) => {   
             return resp.json();
         }).then((r) => {
-            console.log("Fetch on suoritettu !");
+            
+            console.log("Fetch on suoritettu! " + JSON.stringify(r));
+            //palvelin antaa JSON tiedoston //**************************************** */
+            this.state.kentta_data = r;
+            this.setState(this.state);
+
+
+
         }).catch((get_error) => {
-            console.log("Virhe ei yhteyttä palvelimeen !");
+            console.log("Virhe ei yhteyttä palvelimeen ! " + get_error);
         });
 
 
@@ -217,8 +225,8 @@ class App extends React.Component {
 
         // var nappi_tyyli = { color : 'green' , fontSize: 30 };
 
-        return (<div> <button onClick={() => this.lahetaGet()} style={this.state.nappi_tyyli} > Lähetä palvelimelle  </button> </div>);
-
+        //return (<div> <button onClick={() => this.lahetaGet()} style={this.state.nappi_tyyli} > Lähetä palvelimelle  </button> </div>);
+        return (<div> <button onClick={() => this.lahetaGet()}  > Lähetä palvelimelle  </button> </div>);
     }
 
 
@@ -226,13 +234,15 @@ class App extends React.Component {
 
     render() {
 
+        
+        var div_style = { margin: 'auto', width:"10%"};
 
         // const style_a = { td : { color : red }  };
 
         var taulun_tyyli = { borderStyle: 'solid', borderWidth: 5, borderColor: 'green' };
         //ylikirjoittaa kaikkia <table> ja <td> elementit uudella css tyylillä -------------> ei tehty ( käytän jokaista elementtiä kohden erikseen tyyliä)
 
-        return (<div> <br /> <br /> {this.naytaKentat()} <br /> {this.naytaNappi()} </div>);
+        return (<div style = { div_style } > <br /> <br /> {this.naytaKentat()} <br /> {this.naytaNappi()} </div>);
     }
 }
 
