@@ -1,3 +1,10 @@
+
+
+var kayttajat = ["admin", "user00", "topsecret"]; //kovakoodattu data 
+var profiili_data = []; //tallennetaan "kovakoodauksella" konkreetisen käyttäjän profiilitietoja taulukkoon ja tehdä JSON-merkkijono joka palautetaan HTTP-response viestillä käyttäjälle 
+
+
+
 var express = require('express')
 var app = express()
 var bodyParser = require('body-parser');
@@ -58,27 +65,52 @@ app.post('/lomake1', function (req, res) {
 
 //--------------
 
-if(req.body[0] == "admin"){
- // req.body[0] = " **** Admin ******";
- req.body[1] = " **** Admin ******";
 
-  //https://realguess.net/2015/09/26/node-js-crypto-starters/
-  var j_data = req.body[2];
-  req.body[2] = "password hash : "+ require('crypto').createHash('sha256').update(j_data, 'utf8').digest('hex'); //sha256('123123')
+var kayttaja_loytyi = false;
 
+//etsi käyttäjät globaali taulukosta (kavakoodattu data)
+  for(var i = 0; i < kayttajat.length; i++){
+      
+      if(req.body[0] == kayttajat[i]){   
+              kayttaja_loytyi = true;
+            kovakoodattu_data(req.body[0]);
+      }//if
+  
 }
- 
+
+
+      /*
+      if(req.body[0] == "admin"){
+      // req.body[0] = " **** Admin ******";
+      req.body[1] = " **** Admin ******";
+
+        //https://realguess.net/2015/09/26/node-js-crypto-starters/
+        var j_data = req.body[2];
+        req.body[2] = "password hash : "+ require('crypto').createHash('sha256').update(j_data, 'utf8').digest('hex'); //sha256('123123')
+
+        
+       
+        profiili_data = [ "Hei "+ req.body[0] +" , Työtehtäväsi : " + req.body[3], 
+                          "Yhteystietosi -> (puhelinumerosi )" + req.body[4] + "ja ( sähköpostisi ) " + req.body[5] ,
+                          "Salasanasi (sha256) hash : " +req.body[2] ];
+                          
+
+      }
+       */
+
+       var json_tieto = "";
+
+   if( ! kayttaja_loytyi )  json_tieto = JSON.stringify(req.body);
+   else if( kayttaja_loytyi) json_tieto = JSON.stringify(profiili_data); 
 
 // if(req.body[2] == "123123") req.body[2] = "password hash : "+ require('crypto').createHash('sha256').update('123123', 'utf8').digest('hex'); //sha256('123123');
 
-
-var json_tieto = JSON.stringify(req.body);
+//var json_tieto = JSON.stringify(req.body);
 
 console.log("JSON GET tieto : " +json_tieto);
 //--------------
 
-
-  res.send(json_tieto);
+ res.send(json_tieto);
 
 })
 
@@ -114,3 +146,34 @@ app.post('/process_post', function (req, res) {
 app.listen(portti, function () {
   console.log('Example app listening on port !' + portti)
 })
+
+
+
+function kovakoodattu_data(  anna_kayttaja ){
+
+        profiili_data.splice(0, profiili_data.length); //tyhjennä koko taulukko
+
+        profiili_data.push(".login.."); //kaikki käyttäjät saavat
+
+        if( anna_kayttaja == "admin" ){
+            profiili_data.push("Olet tämän palvelimen ylläpitäjä");
+            profiili_data.push("111");
+            profiili_data.push("ADMIN_TOOLS");
+        }
+
+        else if ( anna_kayttaja == "user00"){
+            profiili_data.push("Olet tavallinen käyttäjä");
+            profiili_data.push("222");
+            profiili_data.push("");
+        }
+
+        else if(anna_kayttaja == "topsecret"){
+          profiili_data.push("Kehität salaista projektia");
+          profiili_data.push("333");
+          //sha256 hash 
+          var salainen_data = "j_data";
+          profiili_data.push("password hash : "+ require('crypto').createHash('sha256').update(salainen_data, 'utf8').digest('hex') );  //sha256('123123')
+
+        }
+
+}
