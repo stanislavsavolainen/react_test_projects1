@@ -1,0 +1,54 @@
+
+-> shell 
+      -> index.jsx
+       -> packag.json
+       
+
+# project broken?
+	$ git diff
+
+# reset changes since last commit
+	$ git reset --hard
+
+
+..............................
+
+//backend projektia varten:
+https://github.com/FruitieX/backend-hipster-kit/blob/master/docs/SETUP.md
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator
+
+
+
+        kit/ index.jsx
+         
+..............................
+
+src/utils/routes.jsx
+	  reducer.js
+	  NavigationDrawer.jsx
+
+
+..........................
+object spraed
+...objekti
+
+
+a = {
+  foo: "bar",
+  bar: 42,
+}
+
+b = {
+  ...a,
+  bar: 2,
+}
+
+console.log(b);
+{
+  foo: "bar",
+  bar: 42,
+}
+
+
+
