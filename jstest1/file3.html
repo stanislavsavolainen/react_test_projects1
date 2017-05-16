@@ -1,0 +1,18 @@
+
+
+<script type="text/javascript">
+function download(text, name, type) {
+  var a = document.getElementById("a");
+  var file = new Blob([text], {type: type});
+  a.href = URL.createObjectURL(file);
+  a.download = name;
+}
+</script>
+
+<html>
+<body>
+<a href="" id="a">click here to download your file</a>
+<button onclick="download('file text 123456', 'myfilename2.txt', 'text/plain')">Create file</button>
+</body>
+</html>
+

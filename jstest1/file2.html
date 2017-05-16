@@ -1,0 +1,45 @@
+   <html>
+    <head>
+    <script>
+
+	/*
+      var openFile = function(event) {
+        var input = event.target;
+
+        var reader = new FileReader();
+        reader.onload = function(){
+          var text = reader.result;
+          var node = document.getElementById('output');
+          node.innerText = text;
+          console.log(reader.result.substring(0, 200));
+        };
+        reader.readAsText(input.files[0]);
+      };
+	*/
+
+	function lue_tiedosto(){
+
+	  	
+	  var url = "/home/stanislav/Digitalents/react_p4/";
+          var file_name = "file_data1.txt";	
+		
+	  var readeri = new FileReader;
+ 	  readeri.readAsText(); 
+	  
+	  reader.readAsText(url + file_name);
+	  
+	  var tiedoston_teksti = readeri.result;
+          
+          console.log(tiedoston_teksti);  		
+
+	}
+
+    </script>
+    </head>
+    <body onload='lue_tiedosto()'>
+    <!-- <input type='file' accept='text/plain' onchange='openFile(event)'><br> -->
+    <div id='output'>
+    ...
+    </div>
+    </body>
+    </html>

@@ -1,0 +1,65 @@
+<script type="text/javascript">
+	var x_avain, x_arvo;
+
+	function evaste_funktio() {
+		x_arvo = document.getElementById("tx1").value;
+		x_avain = document.getElementById("tx2").value;
+
+		this.createCookie(x_arvo,x_avain, 10);
+
+		location.reload(); //päivitä selaimen sivun
+	}
+
+
+
+	// -------- koodi otettu https://www.quirksmode.org/js/cookies.html -----------------------------
+	function createCookie(name, value, days) {
+		if (days) {
+			var date = new Date();
+			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			var expires = "; expires=" + date.toGMTString();
+		}
+		else var expires = "";
+		document.cookie = name + "=" + value + expires + "; path=/";
+	}
+
+	function readCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+		}
+		return null;
+	}
+
+	function eraseCookie(name) {
+		createCookie(name, "", -1);
+	}
+
+	//------------------------------------------------------------------------------------------------
+
+	function tulosta_kaikki_evasteet(){
+		
+		//aseta html tagille uusi arvo id - arvon perusteella, laita kaikki evästeet arvoksi
+		document.getElementById("nayta_evasteet_id").innerHTML = document.cookie;
+	}
+
+	//-------------------------------------------
+
+</script>
+
+
+<html>
+<title> Evästeet 1</title>
+
+<body onload="tulosta_kaikki_evasteet()">
+	Avain : <input type="text" id="tx1"><br /> Arvo : <input type="text" id="tx2"><br />
+	<button onClick="evaste_funktio()"> Tallenna eväste </button>
+	<br /><br /><br />
+	<table><td id="nayta_evasteet_id"></td></table> <!-- tänne td kentään tulostan kaikki evästeet -->
+
+</body>
+
+</html>
