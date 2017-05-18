@@ -1,0 +1,79 @@
+
+<script type="text/javascript">
+
+	
+	//document.write("<br /> <font color='green'> Jotain data !!!!! </font>");
+	//document.write("<br /> <a href='#otsikko1'> Otsikko 1 </a>");
+	
+	//document.getElementById("dataA").innerHTML = roska_teksti1();
+	
+
+	//=================================================
+	
+	function roska_teksti2(){
+
+		var data1 = "";
+		for(var i = 0; i < 100; i++){
+			temp_data= "<br /> <font color='red'> Rivi "+ i +" : Tänne jotain tekstiä </font>";		
+			//document.write("<br /> <font color='red'> Rivi "+ i +" : Tänne jotain tekstiä </font>");
+			data1 += temp_data;
+			}
+	
+		document.getElementById("dataA").innerHTML = data1;
+		//document.write("<br /> <a href='#otsikko1'><font color='green'> Otsikko 1 </font></a>");
+		document.getElementById("link1").innerHTML = "<br /> <a href='#otsikko1'> Otsikko 1 </a>";
+		document.getElementById("dataB").innerHTML = data1;
+
+	//return data1;
+	}
+
+	
+	//=================================================
+	
+	
+	
+	
+	function roska_teksti1(){
+
+		for(var i = 0; i < 100; i++){
+		document.write("<br /> <h1> Rivi "+ i +" : Tänne jotain tekstiä </h1>");
+		}
+		
+
+	}
+
+
+
+
+	
+	//================================================
+	
+	
+
+	
+
+</script>
+
+<html>
+<title> Anchor test</title>
+	<body onload="roska_teksti2();">
+		<h1>Anchor test </h1>
+		<!-- <a href = "#Otsikko"></a> -->
+		<a name="otsikko1"> <font color="yellow"> Otsikko 1 </font> </a>
+		<pre> 
+				123 
+				jowjioewjqeioqjwio
+		djwiojwqiodjioq	fjieofjweoifjwioejoi	fjweiojfiowjeiof
+		</pre>
+
+		<a href="#otsikko2"> Otsikko 2 </a> &nbsp;&nbsp;&nbsp; <a href="#otsikko3"> Otsikko 3 </a><br />
+		<p id="dataA"></p>
+		<p id="link1"></p>
+		<a name="otsikko2"> <font color="green"> Otsikko 2 </font> </a>
+		<p id="dataB"></p>
+		<p id="link2"></p>
+		<a name="otsikko3"> <font color="blue"> Otsikko 3 </font> </a>
+		
+		
+	</body>
+</html>
