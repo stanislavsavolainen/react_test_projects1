@@ -14,6 +14,10 @@ import Table, {
 
 import { LabelRadio, RadioGroup } from 'material-ui/Radio';
 
+import Checkbox from 'material-ui/Checkbox'
+
+import AppBar from 'material-ui/AppBar';
+
 
 
 class App extends React.Component {
@@ -62,8 +66,21 @@ class App extends React.Component {
             <Button>Material-ui button 1</Button><Button>Material-ui button 2</Button>
 
             <br /><br />
-           
-            </div>
+
+            <Checkbox label="test123" />
+            <Checkbox label="test123" />
+            <Checkbox label="test123" />
+            <Checkbox label="test123" />
+            <Checkbox label="test123" />
+            <Checkbox label="test123" />
+            <Checkbox label="test123" />
+
+            <br /><br />
+
+
+
+
+        </div>
         );
 
         /*
